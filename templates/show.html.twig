@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} SRoom {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        {# Show flash messages #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <img id="img-size" src="{{ asset('upload/img/image_bien/') }}{{ propriety.image }}" alt="picture proprety">
+                </div>
+                <div class="col-md-4">
+                    <h1>{{ propriety.name }}</h1>
+                    <h2>{{ propriety.nbrrooms }} pieces - {{ propriety.surface }} m2</h2>
+                    <div class="text flex" style="font-size: 4rem;font-weight: bold;">{{ propriety.price| number_format(0, ",", " ") }}€</div>
+                    <div id="myBtn" class="btn btn-primary mt-3"> Contacter l'agence</div>
+                </div>
+
+                {# Modal #}
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Contacter</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ form_start(form) }}
+                                <div class="row">
+                                    <div class="col">{{ form_row(form.firstname) }}</div>
+                                    <div class="col">{{ form_row(form.lastname) }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">{{ form_row(form.email) }}</div>
+                                    <div class="col">{{ form_row(form.phone) }}</div>
+                                </div>
+                                {{ form_rest(form) }}
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button id="btnSubmit" class="btn btn-primary ">Envoyer le mail</button>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <p>{{ propriety.description | nl2br }}</p>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-3">Caractéristiques</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Surface habitable</td>
+                        <td>{{ propriety.surface }} m²</td>
+                    </tr>
+                    <tr>
+                        <td>Pieces</td>
+                        <td>{{ propriety.nbrrooms }} piece{% if propriety.nbrrooms > 1 %}s{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Chambres</td>
+                        <td>{{ propriety.nbrbedrooms }} chambre{% if propriety.nbrbedrooms > 1 %}s{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Adresse</td>
+                        <td>{{ propriety.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ville</td>
+                        <td>{{ propriety.zipcode }} {{ propriety.city }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('.navbar').css('background-color', "#3c5b52");
+        
+        $(document).ready(() => {
+            $("#myBtn").click(function(){
+                $("#myModal").modal();
+            });
+            $("#btnSubmit").click(() => {
+                $("#myBtn").css('visibility', "hidden");
+            });
+        });
+    </script>
+{% endblock %}

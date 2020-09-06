@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="fond-home" class="jumbotron">
+        <div class="row vertical-center">
+            <div class="col-md-10 offset-1 text-center">
+                <h2 class="text-light">Projet Immobilier, Projet de vie<br />Et si on parlait de vous ?</h2>
+                <div class="mt-3">
+                    <a href="{{ path('buy') }}" class="btn mr-2">Acheter</a>
+                    <a href="{{ path('sell') }}" class="btn ml-2">Vendre</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="icon-arrow">
+            <img src="/static/img/home/icons/icon-arrow.png"/>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="biens-recents" class="row">
+            <div class="col-md-12 text-center">
+                <h3>Les derniers biens</h3>
+            </div>
+
+            <div id="card-center" class="col-md-12 text-center mt-3">
+                <div class="row">
+                {% for property in properties %}
+                    <div class="col-md-4">
+                        <a href="{{ path('show', {id: property.id, slug: property.slug}) }}" class="text-dark  card-hover">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top img-size" src="{{ asset('upload/img/image_bien/') }}{{ property.image }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ property.name }}</h5>
+                                    <p class="card-text">{{ property.description[:200] ~ '...' }}</p>
+                                    <p class="card-text font-weight-bold">{{ property.price|number_format(0, ",", " ") }}€</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div id="info-icon" class="mt-5">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img class="" src="/static/img/home/icons/icon-smile.png" alt="Icon">
+                    <h5 class="mt-2">Plus de 2 millions</h5>
+                    <p>de clients nous ont fait confiance</p>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <img class="" src="/static/img/home/icons/icon-home.png" alt="Icon">
+                    <h5 class="mt-2">5 millions</h5>
+                    <p>de personnes logées</p>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <img class="" src="/static/img/home/icons/icon-businessman.png" alt="Icon">
+                    <h5 class="mt-2">Une expertise</h5>
+                    <p>partout en France</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#fond-home').css('height', $(window).height() * 1);
+        $('.vertical-center').css('margin-top', $(window).height() /5);
+        $('#icon-arrow').css('margin-top', $(window).height() - 450);
+
+        $("#icon-arrow").click(() => {
+            $('html, body').animate({
+            scrollTop: $(window).height()-50
+            }, 700)
+        });
+
+        $(window).scroll(() => {
+            if($(document).scrollTop() > 130){
+                $('.navbar').css('background-color', "#3c5b52");
+                $('.navbar').css('box-shadow', "0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 12px 25px 0 rgba(0, 0, 0, 0.19)");
+            }
+            else
+            {
+                $('.navbar').css('background-color', "#3c5b5200");
+                $('.navbar').css('box-shadow', "none");
+            }
+        });
+    </script>
+{% endblock %}

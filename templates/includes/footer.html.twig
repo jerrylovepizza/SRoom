@@ -1,0 +1,33 @@
+{% block footer %}
+    <div id="footer" class="mt-5">
+        <div class="container">
+            <div id="footer-center" class="row pt-5 pb-5">
+                <div class="col-md-3 text-light">
+                    <a href="{{ path('home') }}"><h2>SRoom</h2></a>
+                    <p>Slogan du site mdrr</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="{{ path('buy') }}"><h5>Acheter</h5></a>
+                    <a href="{{ path('sell') }}"><h5>Vendre</h5></a>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-light">Réseaux sociaux</h5>
+                    <a href="https://www.facebook.com" target="_blank">Facebook</a><br>
+                    <a href="https://www.twitter.com" target="_blank">Twitter</a><br>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-light">Contact</h5>
+                    <a href="tel:0556900010">Tél : 05 56 90 00 10</a><br>
+                    <a href="mailto:contact@SRoom.fr">Email : contact@SRoom.fr</a><br>
+                </div>
+            </div>
+        </div>
+
+        <div id="copyright">
+            <p>Copyright - Quentin Gans && Lucas Consejo</p>
+        </div>
+    </div>
+{% endblock %}

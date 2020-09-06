@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Admin - SRoom{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 col-md-9">
+        <h1>Panel Admin</h1>
+
+        {# Show flash messages #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message | raw }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col">Nom du bien</th>
+                    <th>Actions</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td>{{ property.name }}</td>
+                    <td> <a href="{{ path('show', {id: property.id, slug: property.slug }) }}"><i class="fa fa-icon"></i><button class="btn btn-secondary"><i class="fa fa-eye fa-lg mr-2"></i>Voir</button></a> </td>
+                    <td> <a href="{{ path('edit', {id: property.id}) }}"><button class="btn btn-success"><i class="fa fa-pencil fa-lg mr-2"></i>Editer</button></a> </td>
+                    <td>
+
+                        {# Methode delete + id de la property + popu pour confirmer la suppression #}
+                        <form action="{{ path('delete', {id: property.id}) }}" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer ce bien ?')">
+                            <input type="hidden" name="_methods" value="DELETE">
+
+                            {# Generer un CSRF token pour la sécurité #}
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+                            <button class="btn btn-danger"><i class="fa fa-trash-o fa-lg mr-2"></i>Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('add') }}"><button class="btn btn-primary"><i class="fa fa-plus fa-lg mr-2"></i>Ajouter un bien</button></a>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('.navbar').css('background-color', "#3c5b52");
+        $('.navbar').css('position', "relative");
+        $(window).scroll(() => {
+            if($(document).scrollTop() > 20){
+                $('.navbar').css('position', "fixed");
+                $('.navbar').css('box-shadow', "0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 12px 25px 0 rgba(0, 0, 0, 0.19)");
+            }
+            else
+            {
+                $('.navbar').css('position', "relative");
+                $('.navbar').css('box-shadow', "none");
+            }
+        });
+    </script>
+{% endblock %}

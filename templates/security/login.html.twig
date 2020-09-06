@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Connexion - SRoom {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        @keyframes defile {
+            from {background-position: 0px 0px;}
+            to {background-position: 1920px 0px;}
+            }
+            body {
+                animation: defile 20s infinite linear;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+
+        {# Show error #}
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey }}
+            </div>
+        {% endif %}
+
+        <form id="form-login" class="vertical-center" action="{{ path('login') }}" method="post">
+            <h2 id="title-login">Connexion</h2>
+            
+            <div class="form-center-login form-group col-md-4">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}">
+            </div>
+            <div class="form-center-login form-group col-md-4">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="_password" class="form-control">
+            </div>
+            <div class="form-center-login col-md-4">
+                <button class="btn btn-primary btn-block" type="submit">Connexion</button>
+            </div>
+            <div class="form-center-login col-md-4 retour-accueil">
+                <a href="{{ path('home') }}" >Retour à la page d'accueil</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('body').css('background-image', "url(/static/img/login/fond-admin.png)");
+        $('body').css('background-size', "cover");
+        $('.navbar').css('position', "relative");
+        $('.navbar').css('background-color', "transparent");
+        $('.navbar a').css('color', "#3c5b52");
+               
+
+
+        $('.vertical-center').css('margin-top', $(window).height() /10);
+
+        $('#footer').css('display', "none");
+    </script>
+{% endblock %}

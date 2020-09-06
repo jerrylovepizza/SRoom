@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acheter - SRoom{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+        <div id="fond-buy" class="jumbotron text-center text-light">
+            <div class="container">
+                <h1>Les biens</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque in mollitia pariatur praesentium quae quasi suscipit ullam voluptatum! Consectetur dignissimos esse exercitationem magni minima molestiae nesciunt obcaecati provident sunt tenetur.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            {# Search bar #}
+            {{ form_start(form) }}
+            <div class="form-row ml-5">
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minSurface) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minRooms) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minBedrooms) }}
+                </div>
+                <div class="col">
+                    <button class="btn color-btn">Rechercher</button>
+                </div>
+
+            </div>
+            {{ form_end(form) }}
+            {# End search bar#}
+
+            <div class="row flex">
+                <!-- Condition for -->
+                {% for property in properties %}
+                <div class="col-4 mt-3">
+                    <a href="{{ path('show', {id: property.id, slug: property.slug }) }}" class="text-dark  card-hover">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top img-size-2" src="{{ asset('upload/img/image_bien/') }}{{ property.image }}" alt="Card image cap"/>
+                                <h5 class="card-title">
+                                    <p class="text-center">{{ property.name }}</p>
+                                </h5>
+                                <p class="card-text text-center">{{ property.description[:200] ~ '...' }}</p>
+                            <div class="text-primary text-center">{{ property.price|number_format(0, ",", " ") }}€</div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="panigation mt-5 d-flex justify-content-center">
+                {# (l'objet qui est paginable) #}
+                {{ knp_pagination_render(properties) }}
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(window).scroll(() => {
+            if($(document).scrollTop() > 10){
+                $('.navbar').css('background-color', "#3c5b52");
+                $('.navbar').css('box-shadow', "0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 12px 25px 0 rgba(0, 0, 0, 0.19)");
+            }
+            else{
+                $('.navbar').css('background-color', "#3c5b5200");
+                $('.navbar').css('box-shadow', "none");
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,45 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+home:
+    path: /
+    controller: App\Controller\HomeController::home
+
+buy:
+    path: /buy
+    controller: App\Controller\HomeController::buyHome
+
+show:
+    path: /show/{slug}-{id}
+    controller: App\Controller\HomeController::showBienById
+    requirements:
+        slug: '[a-z0-9\-]*'
+sell:
+    path: /sell
+    controller: App\Controller\SellController::sellHome
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+admin:
+    path: /admin
+    controller: App\Controller\AdminProprieteController::index
+
+add:
+    path: /admin/add
+    controller: App\Controller\AdminProprieteController::addBien
+
+edit:
+    path: /admin/edit/{id}
+    controller: App\Controller\AdminProprieteController::editBien
+    methods: [GET, POST]
+
+delete:
+    path: /admin/delete/{id}
+    controller: App\Controller\AdminProprieteController::deleteBien
+    methods: [POST, DELETE]
+
+logout:
+    path: /logout

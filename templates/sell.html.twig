@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vendre - SRoom{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="fond-sell" class="jumbotron text-center text-light">
+        <div class="container">
+            <h1>Vendre</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque in mollitia pariatur praesentium quae quasi suscipit ullam voluptatum! Consectetur dignissimos esse exercitationem magni minima molestiae nesciunt obcaecati provident sunt tenetur.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        {{ include('sell_form/sell_form.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}
