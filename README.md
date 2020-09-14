@@ -1,8 +1,7 @@
-# SRoom : Real Estate Web Site.
-
+# SRoom
 SRoom is a web application that makes it easy to create your own Real Estate website.
 
-### Description
+## Description
 SRoom  trys to make it as easy as possible for users to update their properties, especially when they need a multi-lingual experience. The reasons why SRoom may be a good fit for you are outlined below:
 
 Translate your properties and pages in multiple languages.
