@@ -13,4 +13,4 @@ Add a wide variety of fields to your properties.
 Specify which properties you require to be uploaded.
 SEO and social sharing built in.
 
-SRoom is developed by PHP, Symfony.
+## SRoom is developed by PHP, Symfony.
